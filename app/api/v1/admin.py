@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends
 
 from app.config import settings
 from app.core.models import ProviderHealth
 from app.dependencies import verify_admin_key
+from app.providers.registry import get_registry
 
 router = APIRouter()
 
@@ -16,8 +17,8 @@ async def list_provider_health(
     admin_key: str = Depends(verify_admin_key),  # noqa: ARG001
 ) -> list[ProviderHealth]:
     """List health status of all configured providers."""
-    # TODO: Wire up provider health checks
-    return []
+    registry = get_registry()
+    return await registry.health_checks()
 
 
 @router.get("/config")

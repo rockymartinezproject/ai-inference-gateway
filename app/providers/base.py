@@ -59,6 +59,11 @@ class BaseProvider(ABC):
         ...
 
     @abstractmethod
+    def list_models_sync(self) -> list[ModelInfo]:
+        """Synchronous version for registry lookups."""
+        ...
+
+    @abstractmethod
     async def health_check(self) -> ProviderHealth:
         """Check provider health."""
         ...

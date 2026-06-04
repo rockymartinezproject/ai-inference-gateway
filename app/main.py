@@ -12,6 +12,8 @@ from app.config import settings
 from app.core.errors import GatewayException, gateway_exception_handler, generic_exception_handler
 from app.core.logging import configure_logging
 from app.core.middleware import LoggingMiddleware, RequestIDMiddleware, TimingMiddleware
+from app.providers.factory import build_registry
+from app.providers.registry import set_registry
 
 
 def create_app() -> FastAPI:
@@ -21,7 +23,8 @@ def create_app() -> FastAPI:
     @asynccontextmanager
     async def lifespan(app: FastAPI):  # noqa: ARG001
         """Application lifespan — startup and shutdown."""
-        # TODO: Initialize Redis, DB pools, provider clients
+        registry = build_registry()
+        set_registry(registry)
         yield
         # TODO: Clean up connections
 
