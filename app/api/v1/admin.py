@@ -2,37 +2,28 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, status
 
-from app.config import Settings, settings
+from app.config import settings
 from app.core.models import ProviderHealth
+from app.dependencies import verify_admin_key
 
 router = APIRouter()
 
 
-def verify_admin_key(api_key: str | None = None) -> None:
-    """Verify admin API key."""
-    if not settings.admin_api_key:
-        raise HTTPException(
-            status_code=status.HTTP_501_NOT_IMPLEMENTED,
-            detail="Admin API key not configured",
-        )
-    if api_key != settings.admin_api_key:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Invalid admin API key",
-        )
-
-
 @router.get("/providers/health", response_model=list[ProviderHealth])
-async def list_provider_health() -> list[ProviderHealth]:
+async def list_provider_health(
+    admin_key: str = Depends(verify_admin_key),  # noqa: ARG001
+) -> list[ProviderHealth]:
     """List health status of all configured providers."""
     # TODO: Wire up provider health checks
     return []
 
 
 @router.get("/config")
-async def get_config() -> dict:
+async def get_config(
+    admin_key: str = Depends(verify_admin_key),  # noqa: ARG001
+) -> dict:
     """Get current gateway configuration (sensitive values redacted)."""
     return {
         "gateway_env": settings.gateway_env,

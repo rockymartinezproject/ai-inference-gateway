@@ -11,6 +11,7 @@ from app.api.v1.router import router as api_v1_router
 from app.config import settings
 from app.core.errors import GatewayException, gateway_exception_handler, generic_exception_handler
 from app.core.logging import configure_logging
+from app.core.middleware import LoggingMiddleware, RequestIDMiddleware, TimingMiddleware
 
 
 def create_app() -> FastAPI:
@@ -33,7 +34,10 @@ def create_app() -> FastAPI:
         lifespan=lifespan,
     )
 
-    # Middleware
+    # Middleware — order matters: outermost first
+    app.add_middleware(LoggingMiddleware)
+    app.add_middleware(TimingMiddleware)
+    app.add_middleware(RequestIDMiddleware)
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],
