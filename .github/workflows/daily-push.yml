@@ -1,0 +1,24 @@
+name: Daily Push Tracker
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  verify-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for daily commit
+        run: |
+          LAST_COMMIT=$(git log -1 --format=%cd --date=iso | cut -d' ' -f1)
+          TODAY=$(date +%Y-%m-%d)
+          if [ "$LAST_COMMIT" != "$TODAY" ]; then
+            echo "⚠️ No commit found for today ($TODAY). Last commit: $LAST_COMMIT"
+            exit 1
+          fi
+          echo "✅ Daily commit verified for $TODAY"
