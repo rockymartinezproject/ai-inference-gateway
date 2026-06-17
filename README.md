@@ -140,30 +140,30 @@ terraform apply
 | Day | Feature | Status |
 |---|---|---|
 | 1 | Project scaffolding & architecture | ✅ |
-| 2 | FastAPI server setup with middleware | ✅ |
-| 3 | Provider abstraction layer & registry | ✅ |
-| 4 | OpenAI adapter with HTTP client | ✅ |
-| 5 | Anthropic adapter with Claude translation | ✅ |
-| 6 | Ollama/local adapter | ✅ |
-| 7 | Smart routing engine with fallback | ✅ |
-| 8 | Redis semantic caching | ✅ |
-| 9 | Token bucket rate limiting | ✅ |
-| 10 | SSE streaming proxy | ✅ |
-| 11 | WebSocket streaming | ✅ |
-| 12 | PostgreSQL + TimescaleDB schema | ✅ |
-| 13 | Cost tracking middleware | ✅ |
-| 14 | Usage analytics API | ✅ |
-| 15 | Prometheus metrics | ✅ |
-| 16 | OpenTelemetry tracing | ✅ |
-| 17 | Circuit breaker | ✅ |
-| 18 | Redis Streams queue | ✅ |
-| 19 | Background workers | ✅ |
-| 20 | Shadow mode / request replay | ✅ |
-| 21 | Grafana dashboards | ✅ |
-| 22 | Docker & Docker Compose | ✅ |
-| 23 | Kubernetes & KEDA | ✅ |
-| 24 | Terraform & GitHub Actions | ✅ |
-| 25 | Integration tests & v0.1.0 release | ✅ |
+| 2 | FastAPI server setup with middleware | ⬜ |
+| 3 | Provider abstraction layer & registry | ⬜ |
+| 4 | OpenAI adapter with HTTP client | ⬜ |
+| 5 | Anthropic adapter with Claude translation | ⬜ |
+| 6 | Ollama/local adapter | ⬜ |
+| 7 | Smart routing engine with fallback | ⬜ |
+| 8 | Redis semantic caching | ⬜ |
+| 9 | Token bucket rate limiting | ⬜ |
+| 10 | SSE streaming proxy | ⬜ |
+| 11 | WebSocket streaming | ⬜ |
+| 12 | PostgreSQL + TimescaleDB schema | ⬜ |
+| 13 | Cost tracking middleware | ⬜ |
+| 14 | Usage analytics API | ⬜ |
+| 15 | Prometheus metrics | ⬜ |
+| 16 | OpenTelemetry tracing | ⬜ |
+| 17 | Circuit breaker | ⬜ |
+| 18 | Redis Streams queue | ⬜ |
+| 19 | Background workers | ⬜ |
+| 20 | Shadow mode / request replay | ⬜ |
+| 21 | Grafana dashboards | ⬜ |
+| 22 | Docker & Docker Compose | ⬜ |
+| 23 | Kubernetes & KEDA | ⬜ |
+| 24 | Terraform & GitHub Actions | ⬜ |
+| 25 | Integration tests & v0.1.0 release | ⬜ |
 
 ## Testing
 
