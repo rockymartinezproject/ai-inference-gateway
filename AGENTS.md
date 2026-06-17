@@ -144,3 +144,6 @@ make run-prod
 - [ ] Tests pass: `make test`
 - [ ] Commit message follows convention
 - [ ] Pushed to GitHub
+
+## CI note
+Tests must pass locally (`pytest tests/unit`) before pushing via `scripts/push_to_github.py`.
