@@ -71,9 +71,7 @@ class SemanticCache:
         self._misses += 1
         return None
 
-    async def store(
-        self, query: str, model: str, response: dict[str, Any]
-    ) -> None:
+    async def store(self, query: str, model: str, response: dict[str, Any]) -> None:
         """Store a response in the semantic cache."""
         embedding = self._backend.embed(query)
         cache_key = self._cache_key(embedding)

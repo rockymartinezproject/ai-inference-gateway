@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import AsyncIterator
+from collections.abc import AsyncIterator
 
 from app.core.models import (
     ChatCompletionRequest,
@@ -35,9 +35,7 @@ class BaseProvider(ABC):
         return self._latency_ms
 
     @abstractmethod
-    async def chat_completion(
-        self, request: ChatCompletionRequest
-    ) -> ChatCompletionResponse:
+    async def chat_completion(self, request: ChatCompletionRequest) -> ChatCompletionResponse:
         """Generate a chat completion."""
         ...
 

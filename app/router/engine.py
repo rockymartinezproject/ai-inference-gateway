@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import random
 from enum import Enum
-from typing import Callable
 
 from app.core.errors import ModelNotFound, ProviderError
 from app.core.models import ChatCompletionRequest
@@ -119,9 +118,7 @@ class SmartRouter:
                 provider.set_health(False)
                 continue
 
-        raise last_error or ProviderError(
-            f"All providers failed for model {request.model}"
-        )
+        raise last_error or ProviderError(f"All providers failed for model {request.model}")
 
     async def route_chat_completion_stream(
         self,
@@ -142,9 +139,7 @@ class SmartRouter:
                 provider.set_health(False)
                 continue
 
-        raise last_error or ProviderError(
-            f"All providers failed for model {request.model}"
-        )
+        raise last_error or ProviderError(f"All providers failed for model {request.model}")
 
     async def route_embedding(self, request, strategy: RoutingStrategy = RoutingStrategy.DEFAULT):
         """Route an embedding request with fallback support."""
@@ -159,6 +154,4 @@ class SmartRouter:
                 provider.set_health(False)
                 continue
 
-        raise last_error or ProviderError(
-            f"All providers failed for model {request.model}"
-        )
+        raise last_error or ProviderError(f"All providers failed for model {request.model}")

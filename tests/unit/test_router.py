@@ -5,7 +5,13 @@ from __future__ import annotations
 import pytest
 
 from app.core.errors import ModelNotFound
-from app.core.models import ChatCompletionRequest, ChatMessage, ModelInfo, ProviderHealth, ProviderStatus
+from app.core.models import (
+    ChatCompletionRequest,
+    ChatMessage,
+    ModelInfo,
+    ProviderHealth,
+    ProviderStatus,
+)
 from app.providers.base import BaseProvider
 from app.providers.registry import ProviderRegistry
 from app.router.engine import RoutingStrategy, SmartRouter
@@ -56,21 +62,33 @@ def router() -> SmartRouter:
     reg.register(
         FakeProvider(
             "cheap",
-            [ModelInfo(id="gpt-4", owned_by="openai", cost_per_1k_input=1.0, cost_per_1k_output=2.0)],
+            [
+                ModelInfo(
+                    id="gpt-4", owned_by="openai", cost_per_1k_input=1.0, cost_per_1k_output=2.0
+                )
+            ],
             latency=100.0,
         )
     )
     reg.register(
         FakeProvider(
             "expensive",
-            [ModelInfo(id="gpt-4", owned_by="openai", cost_per_1k_input=10.0, cost_per_1k_output=20.0)],
+            [
+                ModelInfo(
+                    id="gpt-4", owned_by="openai", cost_per_1k_input=10.0, cost_per_1k_output=20.0
+                )
+            ],
             latency=10.0,
         )
     )
     reg.register(
         FakeProvider(
             "local",
-            [ModelInfo(id="llama3.1", owned_by="meta", cost_per_1k_input=0.0, cost_per_1k_output=0.0)],
+            [
+                ModelInfo(
+                    id="llama3.1", owned_by="meta", cost_per_1k_input=0.0, cost_per_1k_output=0.0
+                )
+            ],
             latency=50.0,
         )
     )

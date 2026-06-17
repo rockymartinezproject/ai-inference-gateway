@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from app.config import settings
 from app.providers.anthropic_provider import AnthropicProvider
-from app.providers.base import BaseProvider
 from app.providers.ollama_provider import OllamaProvider
 from app.providers.openai_provider import OpenAIProvider
 from app.providers.registry import ProviderRegistry

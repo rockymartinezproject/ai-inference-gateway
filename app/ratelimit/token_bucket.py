@@ -37,7 +37,6 @@ class TokenBucket:
     ) -> None:
         """Check if request is within rate limits. Raises RateLimitExceeded if not."""
         user_id = getattr(request.state, "user_id", "anonymous")
-        model = getattr(request.state, "model", "default")
 
         # Per-user request bucket
         await self._consume_bucket(
@@ -81,13 +80,14 @@ class TokenBucket:
 
         if tokens < requested:
             retry_after = int((requested - tokens) / refill_rate) + 1
-            raise RateLimitExceeded(
-                f"Rate limit exceeded. Retry after {retry_after}s"
-            )
+            raise RateLimitExceeded(f"Rate limit exceeded. Retry after {retry_after}s")
 
         tokens -= requested
-        await self._redis.hset(bucket_key, mapping={
-            "tokens": tokens,
-            "last_update": now,
-        })
+        await self._redis.hset(
+            bucket_key,
+            mapping={
+                "tokens": tokens,
+                "last_update": now,
+            },
+        )
         await self._redis.expire(bucket_key, window)

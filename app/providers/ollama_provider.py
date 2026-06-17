@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 import time
-from typing import AsyncIterator
+from collections.abc import AsyncIterator
 
 import httpx
 
+from app.core.errors import ProviderError
 from app.core.models import (
     ChatCompletionRequest,
     ChatCompletionResponse,
@@ -19,7 +20,6 @@ from app.core.models import (
     ProviderStatus,
     Usage,
 )
-from app.core.errors import ProviderError
 from app.providers.base import BaseProvider
 
 
@@ -59,14 +59,10 @@ class OllamaProvider(BaseProvider):
             ),
         ]
 
-    async def chat_completion(
-        self, request: ChatCompletionRequest
-    ) -> ChatCompletionResponse:
+    async def chat_completion(self, request: ChatCompletionRequest) -> ChatCompletionResponse:
         payload = {
             "model": request.model,
-            "messages": [
-                {"role": m.role, "content": m.content} for m in request.messages
-            ],
+            "messages": [{"role": m.role, "content": m.content} for m in request.messages],
             "stream": False,
             "options": {},
         }
@@ -85,9 +81,7 @@ class OllamaProvider(BaseProvider):
                 provider=self.name,
             ) from exc
         except httpx.RequestError as exc:
-            raise ProviderError(
-                f"Ollama request failed: {exc}", provider=self.name
-            ) from exc
+            raise ProviderError(f"Ollama request failed: {exc}", provider=self.name) from exc
 
         message = data.get("message", {})
         # Ollama doesn't return token counts, estimate roughly
@@ -120,9 +114,7 @@ class OllamaProvider(BaseProvider):
     ) -> AsyncIterator[ChatCompletionStreamChunk]:
         payload = {
             "model": request.model,
-            "messages": [
-                {"role": m.role, "content": m.content} for m in request.messages
-            ],
+            "messages": [{"role": m.role, "content": m.content} for m in request.messages],
             "stream": True,
             "options": {},
         }
@@ -130,9 +122,7 @@ class OllamaProvider(BaseProvider):
             payload["options"]["temperature"] = request.temperature
 
         try:
-            async with self._client.stream(
-                "POST", "/api/chat", json=payload
-            ) as resp:
+            async with self._client.stream("POST", "/api/chat", json=payload) as resp:
                 resp.raise_for_status()
                 import json as _json
 
@@ -162,9 +152,7 @@ class OllamaProvider(BaseProvider):
                 provider=self.name,
             ) from exc
         except httpx.RequestError as exc:
-            raise ProviderError(
-                f"Ollama stream failed: {exc}", provider=self.name
-            ) from exc
+            raise ProviderError(f"Ollama stream failed: {exc}", provider=self.name) from exc
 
     async def embedding(self, request: EmbeddingRequest) -> EmbeddingResponse:
         payload = {

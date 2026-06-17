@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 import time
-from typing import AsyncIterator
+from collections.abc import AsyncIterator
 
 import httpx
 
+from app.core.errors import ProviderError
 from app.core.models import (
     ChatCompletionRequest,
     ChatCompletionResponse,
@@ -19,7 +20,6 @@ from app.core.models import (
     ProviderStatus,
     Usage,
 )
-from app.core.errors import ProviderError
 from app.providers.base import BaseProvider
 
 
@@ -55,9 +55,7 @@ class AnthropicProvider(BaseProvider):
             ),
         ]
 
-    def _to_anthropic_messages(
-        self, messages: list
-    ) -> tuple[list[dict], str | None]:
+    def _to_anthropic_messages(self, messages: list) -> tuple[list[dict], str | None]:
         """Convert OpenAI-style messages to Anthropic format.
 
         Anthropic uses a single 'system' parameter and 'user'/'assistant' messages.
@@ -71,9 +69,7 @@ class AnthropicProvider(BaseProvider):
                 chat_messages.append({"role": msg.role, "content": msg.content})
         return chat_messages, system_prompt
 
-    async def chat_completion(
-        self, request: ChatCompletionRequest
-    ) -> ChatCompletionResponse:
+    async def chat_completion(self, request: ChatCompletionRequest) -> ChatCompletionResponse:
         messages, system = self._to_anthropic_messages(request.messages)
         payload: dict = {
             "model": request.model,
@@ -97,9 +93,7 @@ class AnthropicProvider(BaseProvider):
                 provider=self.name,
             ) from exc
         except httpx.RequestError as exc:
-            raise ProviderError(
-                f"Anthropic request failed: {exc}", provider=self.name
-            ) from exc
+            raise ProviderError(f"Anthropic request failed: {exc}", provider=self.name) from exc
 
         content_text = ""
         for block in data.get("content", []):
@@ -120,8 +114,7 @@ class AnthropicProvider(BaseProvider):
             usage=Usage(
                 prompt_tokens=data["usage"]["input_tokens"],
                 completion_tokens=data["usage"]["output_tokens"],
-                total_tokens=data["usage"]["input_tokens"]
-                + data["usage"]["output_tokens"],
+                total_tokens=data["usage"]["input_tokens"] + data["usage"]["output_tokens"],
             ),
         )
 
@@ -141,9 +134,7 @@ class AnthropicProvider(BaseProvider):
             payload["temperature"] = request.temperature
 
         try:
-            async with self._client.stream(
-                "POST", "/v1/messages", json=payload
-            ) as resp:
+            async with self._client.stream("POST", "/v1/messages", json=payload) as resp:
                 resp.raise_for_status()
                 import json as _json
 
@@ -176,14 +167,10 @@ class AnthropicProvider(BaseProvider):
                 provider=self.name,
             ) from exc
         except httpx.RequestError as exc:
-            raise ProviderError(
-                f"Anthropic stream failed: {exc}", provider=self.name
-            ) from exc
+            raise ProviderError(f"Anthropic stream failed: {exc}", provider=self.name) from exc
 
     async def embedding(self, request: EmbeddingRequest) -> EmbeddingResponse:
-        raise ProviderError(
-            "Anthropic does not support embeddings", provider=self.name
-        )
+        raise ProviderError("Anthropic does not support embeddings", provider=self.name)
 
     async def list_models(self) -> list[ModelInfo]:
         return self._models

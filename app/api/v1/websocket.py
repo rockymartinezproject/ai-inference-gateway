@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 
 from app.core.models import ChatCompletionRequest, ChatMessage
-from app.dependencies import verify_api_key
 from app.providers.registry import get_registry
 from app.router.engine import SmartRouter
 

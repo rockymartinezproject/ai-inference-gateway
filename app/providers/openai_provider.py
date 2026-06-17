@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 import time
-from typing import AsyncIterator
+from collections.abc import AsyncIterator
 
 import httpx
 
+from app.core.errors import ProviderError
 from app.core.models import (
     ChatCompletionRequest,
     ChatCompletionResponse,
@@ -19,7 +20,6 @@ from app.core.models import (
     ProviderStatus,
     Usage,
 )
-from app.core.errors import ProviderError
 from app.providers.base import BaseProvider
 
 
@@ -60,14 +60,10 @@ class OpenAIProvider(BaseProvider):
             ),
         ]
 
-    async def chat_completion(
-        self, request: ChatCompletionRequest
-    ) -> ChatCompletionResponse:
+    async def chat_completion(self, request: ChatCompletionRequest) -> ChatCompletionResponse:
         payload = {
             "model": request.model,
-            "messages": [
-                {"role": m.role, "content": m.content} for m in request.messages
-            ],
+            "messages": [{"role": m.role, "content": m.content} for m in request.messages],
             "temperature": request.temperature,
             "max_tokens": request.max_tokens,
             "top_p": request.top_p,
@@ -113,9 +109,7 @@ class OpenAIProvider(BaseProvider):
     ) -> AsyncIterator[ChatCompletionStreamChunk]:
         payload = {
             "model": request.model,
-            "messages": [
-                {"role": m.role, "content": m.content} for m in request.messages
-            ],
+            "messages": [{"role": m.role, "content": m.content} for m in request.messages],
             "temperature": request.temperature,
             "max_tokens": request.max_tokens,
             "top_p": request.top_p,
@@ -125,9 +119,7 @@ class OpenAIProvider(BaseProvider):
         payload = {k: v for k, v in payload.items() if v is not None}
 
         try:
-            async with self._client.stream(
-                "POST", "/v1/chat/completions", json=payload
-            ) as resp:
+            async with self._client.stream("POST", "/v1/chat/completions", json=payload) as resp:
                 resp.raise_for_status()
                 async for line in resp.aiter_lines():
                     if line.startswith("data: "):

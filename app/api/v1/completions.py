@@ -5,11 +5,10 @@ from __future__ import annotations
 from fastapi import APIRouter, Depends, HTTPException, Request
 from starlette.responses import StreamingResponse
 
-from app.core.errors import GatewayException, ModelNotFound
 from app.core.models import ChatCompletionRequest, ChatCompletionResponse, ModelsResponse
 from app.dependencies import verify_api_key
 from app.providers.registry import get_registry
-from app.router.engine import RoutingStrategy, SmartRouter
+from app.router.engine import SmartRouter
 
 router = APIRouter()
 
