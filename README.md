@@ -140,16 +140,16 @@ terraform apply
 | Day | Feature | Status |
 |---|---|---|
 | 1 | Project scaffolding & architecture | ✅ |
-| 2 | FastAPI server setup with middleware | ⬜ |
-| 3 | Provider abstraction layer & registry | ⬜ |
-| 4 | OpenAI adapter with HTTP client | ⬜ |
-| 5 | Anthropic adapter with Claude translation | ⬜ |
-| 6 | Ollama/local adapter | ⬜ |
-| 7 | Smart routing engine with fallback | ⬜ |
-| 8 | Redis semantic caching | ⬜ |
-| 9 | Token bucket rate limiting | ⬜ |
-| 10 | SSE streaming proxy | ⬜ |
-| 11 | WebSocket streaming | ⬜ |
+| 2 | FastAPI server setup with middleware | ✅ |
+| 3 | Provider abstraction layer & registry | ✅ |
+| 4 | OpenAI adapter with HTTP client | ✅ |
+| 5 | Anthropic adapter with Claude translation | ✅ |
+| 6 | Ollama/local adapter | ✅ |
+| 7 | Smart routing engine with fallback | ✅ |
+| 8 | Redis semantic caching | ✅ |
+| 9 | Token bucket rate limiting | ✅ |
+| 10 | SSE streaming proxy | ✅ |
+| 11 | WebSocket streaming | ✅ |
 | 12 | PostgreSQL + TimescaleDB schema | ⬜ |
 | 13 | Cost tracking middleware | ⬜ |
 | 14 | Usage analytics API | ⬜ |
