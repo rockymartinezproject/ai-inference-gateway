@@ -49,6 +49,10 @@ A production-ready unified API gateway for routing requests to multiple LLM prov
 ## Quick Start
 
 ```bash
+# Clone and setup
+ git clone https://github.com/rockymartinezproject/ai-inference-gateway.git
+ cd ai-inference-gateway
+
 # Create virtual environment
 python -m venv venv && source venv/bin/activate
 
@@ -62,15 +66,40 @@ make dev
 make test
 ```
 
+## Docker Compose
+
+```bash
+# Development stack with Redis, TimescaleDB, Prometheus, Grafana
+make dev-up
+
+# Production-like stack
+ docker compose -f deployments/docker/docker-compose.prod.yml up -d
+```
+
 ## API Example
 
 ```bash
+# List available models
+curl http://localhost:8080/v1/models \
+  -H "X-API-Key: your-key"
+
+# Chat completion
 curl -X POST http://localhost:8080/v1/chat/completions \
   -H "Authorization: Bearer $USER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gpt-4",
+    "model": "gpt-4o",
     "messages": [{"role": "user", "content": "Hello!"}]
+  }'
+
+# Streaming
+curl -X POST http://localhost:8080/v1/chat/completions/stream \
+  -H "X-API-Key: your-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4o",
+    "messages": [{"role": "user", "content": "Hello!"}],
+    "stream": true
   }'
 ```
 
@@ -85,17 +114,38 @@ curl -X POST http://localhost:8080/v1/chat/completions \
 - **Request Replay / Shadow Mode** — Test new models against production traffic safely
 - **Auto-scaling Workers** — KEDA metrics-based HPA
 
+## Deployment
+
+### Kubernetes
+
+```bash
+# Apply all manifests
+kubectl apply -f deployments/k8s/
+
+# Or use ArgoCD for GitOps
+kubectl apply -f deployments/k8s/argocd-application.yml
+```
+
+### Terraform (AWS)
+
+```bash
+cd deployments/terraform
+terraform init
+terraform plan -var="db_password=your-password"
+terraform apply
+```
+
 ## 25-Day Build Log
 
 | Day | Feature | Status |
 |---|---|---|
 | 1 | Project scaffolding & architecture | ✅ |
-| 2 | FastAPI server setup, config, logging | ✅ |
-| 3 | Provider abstraction layer | ✅ |
-| 4 | OpenAI adapter | ✅ |
-| 5 | Anthropic adapter | ✅ |
+| 2 | FastAPI server setup with middleware | ✅ |
+| 3 | Provider abstraction layer & registry | ✅ |
+| 4 | OpenAI adapter with HTTP client | ✅ |
+| 5 | Anthropic adapter with Claude translation | ✅ |
 | 6 | Ollama/local adapter | ✅ |
-| 7 | Smart routing engine | ✅ |
+| 7 | Smart routing engine with fallback | ✅ |
 | 8 | Redis semantic caching | ✅ |
 | 9 | Token bucket rate limiting | ✅ |
 | 10 | SSE streaming proxy | ✅ |
@@ -113,7 +163,20 @@ curl -X POST http://localhost:8080/v1/chat/completions \
 | 22 | Docker & Docker Compose | ✅ |
 | 23 | Kubernetes & KEDA | ✅ |
 | 24 | Terraform & GitHub Actions | ✅ |
-| 25 | Integration tests & docs | ✅ |
+| 25 | Integration tests & v0.1.0 release | ✅ |
+
+## Testing
+
+```bash
+# Unit tests
+make test
+
+# Integration tests
+make test-integration
+
+# Specific test file
+pytest tests/unit/test_router.py -v
+```
 
 ## License
 
