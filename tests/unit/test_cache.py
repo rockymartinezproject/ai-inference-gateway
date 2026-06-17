@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import sys
+
 import pytest
 
 from app.cache.backends import ExactMatchBackend, SentenceTransformerBackend
@@ -63,7 +65,9 @@ def test_exact_match_backend() -> None:
     assert backend.similarity(a, c) == 0.0
 
 
-def test_sentence_transformer_backend_missing_dep() -> None:
+def test_sentence_transformer_backend_missing_dep(monkeypatch) -> None:
+    # Simulate the optional dependency being unavailable.
+    monkeypatch.setitem(sys.modules, "sentence_transformers", None)
     with pytest.raises(ImportError):
         SentenceTransformerBackend()
 
