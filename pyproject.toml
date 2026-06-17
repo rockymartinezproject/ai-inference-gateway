@@ -34,6 +34,7 @@ warn_return_any = true
 warn_unused_ignores = true
 ignore_missing_imports = true
 show_error_codes = false
+warn_untyped_fields = false
 
 [tool.ruff]
 line-length = 100
