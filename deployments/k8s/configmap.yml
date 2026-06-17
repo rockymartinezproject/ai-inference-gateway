@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway-config
+  namespace: ai-gateway
+data:
+  GATEWAY_PORT: "8080"
+  GATEWAY_ENV: "production"
+  GATEWAY_WORKERS: "4"
+  REDIS_URL: "redis://redis:6379/0"
+  DATABASE_URL: "postgresql+asyncpg://postgres:postgres@postgres:5432/gateway"
+  PROMETHEUS_PORT: "9090"
+  ENABLE_SEMANTIC_CACHE: "true"
+  ENABLE_RATE_LIMITING: "true"
+  ENABLE_CIRCUIT_BREAKER: "true"
+  ENABLE_COST_TRACKING: "true"
+  ENABLE_SHADOW_MODE: "false"

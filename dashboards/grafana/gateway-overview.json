@@ -1,0 +1,83 @@
+{
+  "dashboard": {
+    "title": "AI Inference Gateway — Overview",
+    "uid": "gateway-overview",
+    "timezone": "utc",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Requests per Second",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "rate(gateway_requests_total[1m])",
+            "legendFormat": "{{provider}}/{{model}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "Request Duration (p95)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(gateway_request_duration_seconds_bucket[5m]))",
+            "legendFormat": "{{provider}}/{{model}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+      },
+      {
+        "id": 3,
+        "title": "Token Usage",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(gateway_tokens_total[5m])",
+            "legendFormat": "{{type}} — {{model}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8}
+      },
+      {
+        "id": 4,
+        "title": "Cost (USD/hour)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(gateway_cost_usd_total[1h])",
+            "legendFormat": "{{provider}}/{{model}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8}
+      },
+      {
+        "id": 5,
+        "title": "Cache Hit Rate",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "rate(gateway_cache_hits_total[5m]) / (rate(gateway_cache_hits_total[5m]) + rate(gateway_cache_misses_total[5m]))",
+            "legendFormat": "hit rate"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 8, "x": 0, "y": 16}
+      },
+      {
+        "id": 6,
+        "title": "Provider Health",
+        "type": "table",
+        "targets": [
+          {
+            "expr": "gateway_provider_health_checks_total",
+            "format": "table"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 16, "x": 8, "y": 16}
+      }
+    ],
+    "time": {"from": "now-1h", "to": "now"},
+    "refresh": "10s"
+  }
+}

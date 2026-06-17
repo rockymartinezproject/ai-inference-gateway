@@ -1,0 +1,24 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: ai-inference-gateway
+  namespace: ai-gateway
+spec:
+  scaleTargetRef:
+    name: ai-inference-gateway
+  minReplicaCount: 3
+  maxReplicaCount: 50
+  cooldownPeriod: 300
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: http://prometheus.monitoring.svc.cluster.local:9090
+        metricName: gateway_requests_per_second
+        threshold: "100"
+        query: |
+          sum(rate(gateway_requests_total[1m]))
+    - type: metrics-api
+      metadata:
+        targetValue: "70"
+        url: "http://ai-inference-gateway:9090/metrics"
+        valueLocation: 'gateway_request_duration_seconds{quantile="0.95"}'

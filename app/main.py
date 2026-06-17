@@ -25,8 +25,12 @@ def create_app() -> FastAPI:
         """Application lifespan — startup and shutdown."""
         registry = build_registry()
         set_registry(registry)
+        # TODO: Initialize Redis, DB pools
         yield
         # TODO: Clean up connections
+        for provider in registry.all():
+            if hasattr(provider, "close"):
+                await provider.close()
 
     app = FastAPI(
         title="AI Inference Gateway",

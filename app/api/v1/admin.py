@@ -7,6 +7,7 @@ from fastapi import APIRouter, Depends
 from app.config import settings
 from app.core.models import ProviderHealth
 from app.dependencies import verify_admin_key
+from app.observability.metrics import metrics_response
 from app.providers.registry import get_registry
 
 router = APIRouter()
@@ -34,3 +35,11 @@ async def get_config(
         "enable_cost_tracking": settings.enable_cost_tracking,
         "enable_shadow_mode": settings.enable_shadow_mode,
     }
+
+
+@router.get("/metrics")
+async def prometheus_metrics(
+    admin_key: str = Depends(verify_admin_key),  # noqa: ARG001
+) -> bytes:
+    """Prometheus metrics endpoint."""
+    return metrics_response()

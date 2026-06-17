@@ -1,0 +1,47 @@
+{
+  "dashboard": {
+    "title": "AI Inference Gateway — Cost Analytics",
+    "uid": "gateway-cost",
+    "timezone": "utc",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Daily Spend by Provider",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "sum by (provider) (increase(gateway_cost_usd_total[1d]))",
+            "legendFormat": "{{provider}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+      },
+      {
+        "id": 2,
+        "title": "Daily Spend by Model",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "sum by (model) (increase(gateway_cost_usd_total[1d]))",
+            "legendFormat": "{{model}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+      },
+      {
+        "id": 3,
+        "title": "Top Models by Token Volume",
+        "type": "bar gauge",
+        "targets": [
+          {
+            "expr": "topk(10, sum by (model) (gateway_tokens_total))",
+            "legendFormat": "{{model}}"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 24, "x": 0, "y": 8}
+      }
+    ],
+    "time": {"from": "now-7d", "to": "now"},
+    "refresh": "1m"
+  }
+}
