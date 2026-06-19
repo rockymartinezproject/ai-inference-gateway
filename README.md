@@ -151,7 +151,7 @@ terraform apply
 | 10 | SSE streaming proxy | ✅ |
 | 11 | WebSocket streaming | ✅ |
 | 12 | PostgreSQL + TimescaleDB schema | ✅ |
-| 13 | Cost tracking middleware | ⬜ |
+| 13 | Cost tracking middleware | ✅ |
 | 14 | Usage analytics API | ⬜ |
 | 15 | Prometheus metrics | ⬜ |
 | 16 | OpenTelemetry tracing | ⬜ |
