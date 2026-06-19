@@ -150,7 +150,7 @@ terraform apply
 | 9 | Token bucket rate limiting | ✅ |
 | 10 | SSE streaming proxy | ✅ |
 | 11 | WebSocket streaming | ✅ |
-| 12 | PostgreSQL + TimescaleDB schema | ⬜ |
+| 12 | PostgreSQL + TimescaleDB schema | ✅ |
 | 13 | Cost tracking middleware | ⬜ |
 | 14 | Usage analytics API | ⬜ |
 | 15 | Prometheus metrics | ⬜ |
