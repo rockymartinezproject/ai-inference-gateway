@@ -153,7 +153,7 @@ terraform apply
 | 12 | PostgreSQL + TimescaleDB schema | ✅ |
 | 13 | Cost tracking middleware | ✅ |
 | 14 | Usage analytics API | ✅ |
-| 15 | Prometheus metrics | ⬜ |
+| 15 | Prometheus metrics | ✅ |
 | 16 | OpenTelemetry tracing | ⬜ |
 | 17 | Circuit breaker | ⬜ |
 | 18 | Redis Streams queue | ⬜ |
