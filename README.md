@@ -154,7 +154,7 @@ terraform apply
 | 13 | Cost tracking middleware | ✅ |
 | 14 | Usage analytics API | ✅ |
 | 15 | Prometheus metrics | ✅ |
-| 16 | OpenTelemetry tracing | ⬜ |
+| 16 | OpenTelemetry tracing | ✅ |
 | 17 | Circuit breaker | ⬜ |
 | 18 | Redis Streams queue | ⬜ |
 | 19 | Background workers | ⬜ |
