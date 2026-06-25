@@ -155,7 +155,7 @@ terraform apply
 | 14 | Usage analytics API | ✅ |
 | 15 | Prometheus metrics | ✅ |
 | 16 | OpenTelemetry tracing | ✅ |
-| 17 | Circuit breaker | ⬜ |
+| 17 | Circuit breaker | ✅ |
 | 18 | Redis Streams queue | ⬜ |
 | 19 | Background workers | ⬜ |
 | 20 | Shadow mode / request replay | ⬜ |
