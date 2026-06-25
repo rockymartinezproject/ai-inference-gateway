@@ -147,3 +147,6 @@ make run-prod
 
 ## CI note
 Tests must pass locally (`pytest tests/unit`) before pushing via `scripts/push_to_github.py`.
+
+## Push workflow
+Because local git cannot write the index in this environment, pushes use the GitHub REST API.
