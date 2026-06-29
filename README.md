@@ -158,7 +158,7 @@ terraform apply
 | 17 | Circuit breaker | ✅ |
 | 18 | Redis Streams queue | ✅ |
 | 19 | Background workers | ✅ |
-| 20 | Shadow mode / request replay | ⬜ |
+| 20 | Shadow mode / request replay | ✅ |
 | 21 | Grafana dashboards | ⬜ |
 | 22 | Docker & Docker Compose | ⬜ |
 | 23 | Kubernetes & KEDA | ⬜ |
