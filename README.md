@@ -162,7 +162,7 @@ terraform apply
 | 21 | Grafana dashboards | ✅ |
 | 22 | Docker & Docker Compose | ✅ |
 | 23 | Kubernetes & KEDA | ✅ |
-| 24 | Terraform & GitHub Actions | ⬜ |
+| 24 | Terraform & GitHub Actions | ✅ |
 | 25 | Integration tests & v0.1.0 release | ⬜ |
 
 ## Testing
