@@ -135,7 +135,7 @@ terraform plan -var="db_password=your-password"
 terraform apply
 ```
 
-## 25-Day Build Log
+## Build Log
 
 | Day | Feature | Status |
 |---|---|---|
@@ -164,6 +164,7 @@ terraform apply
 | 23 | Kubernetes & KEDA | ✅ |
 | 24 | Terraform & GitHub Actions | ✅ |
 | 25 | Integration tests & v0.1.0 release | ✅ |
+| 26 | Real provider integration tests | ✅ |
 
 ## Testing
 
@@ -173,6 +174,9 @@ make test
 
 # Integration tests
 make test-integration
+
+# Real-provider integration tests (requires API keys)
+make test-integration-real
 
 # Specific test file
 pytest tests/unit/test_router.py -v
