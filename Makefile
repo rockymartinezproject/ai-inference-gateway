@@ -11,6 +11,7 @@ help:
 	@echo "  dev            - Run development server with auto-reload"
 	@echo "  test           - Run unit tests"
 	@echo "  test-integration - Run integration tests"
+	@echo "  test-integration-real - Run real-provider integration tests"
 	@echo "  lint           - Run ruff linter and mypy type checker"
 	@echo "  format         - Format code with black and isort"
 	@echo "  clean          - Remove build artifacts"
@@ -30,6 +31,9 @@ test:
 
 test-integration:
 	pytest tests/integration -v
+
+test-integration-real:
+	pytest tests/integration/test_real_providers.py -v
 
 lint:
 	ruff check app tests
