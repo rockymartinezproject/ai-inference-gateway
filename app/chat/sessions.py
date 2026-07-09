@@ -49,9 +49,7 @@ class ChatSessionStore:
     async def get(self, session_id: str) -> ChatSession | None:
         return self._sessions.get(session_id)
 
-    async def add_message(
-        self, session_id: str, role: str, content: str
-    ) -> ChatSession | None:
+    async def add_message(self, session_id: str, role: str, content: str) -> ChatSession | None:
         session = self._sessions.get(session_id)
         if session is None:
             return None
@@ -59,9 +57,7 @@ class ChatSessionStore:
         session.updated_at = datetime.now(UTC)
         return session
 
-    async def list_sessions(
-        self, user_id: str | None = None
-    ) -> list[ChatSession]:
+    async def list_sessions(self, user_id: str | None = None) -> list[ChatSession]:
         sessions = list(self._sessions.values())
         if user_id is not None:
             sessions = [s for s in sessions if s.user_id == user_id]
