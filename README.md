@@ -165,6 +165,7 @@ terraform apply
 | 24 | Terraform & GitHub Actions | ✅ |
 | 25 | Integration tests & v0.1.0 release | ✅ |
 | 26 | Real provider integration tests | ✅ |
+| 27 | Load testing with k6 | ✅ |
 
 ## Testing
 
@@ -177,6 +178,9 @@ make test-integration
 
 # Real-provider integration tests (requires API keys)
 make test-integration-real
+
+# Load tests (requires k6 and a running gateway)
+make test-load
 
 # Specific test file
 pytest tests/unit/test_router.py -v
