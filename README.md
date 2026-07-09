@@ -166,6 +166,7 @@ terraform apply
 | 25 | Integration tests & v0.1.0 release | ✅ |
 | 26 | Real provider integration tests | ✅ |
 | 27 | Load testing with k6 | ✅ |
+| 28 | Plugin system for custom middleware | ✅ |
 
 ## Testing
 
