@@ -12,6 +12,7 @@ help:
 	@echo "  test           - Run unit tests"
 	@echo "  test-integration - Run integration tests"
 	@echo "  test-integration-real - Run real-provider integration tests"
+	@echo "  test-load      - Run k6 load tests against local gateway"
 	@echo "  lint           - Run ruff linter and mypy type checker"
 	@echo "  format         - Format code with black and isort"
 	@echo "  clean          - Remove build artifacts"
@@ -34,6 +35,9 @@ test-integration:
 
 test-integration-real:
 	pytest tests/integration/test_real_providers.py -v
+
+test-load:
+	k6 run tests/load/k6_script.js
 
 lint:
 	ruff check app tests
