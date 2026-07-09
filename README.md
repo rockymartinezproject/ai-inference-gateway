@@ -167,6 +167,7 @@ terraform apply
 | 26 | Real provider integration tests | ✅ |
 | 27 | Load testing with k6 | ✅ |
 | 28 | Plugin system for custom middleware | ✅ |
+| 29 | Persistent chat sessions & history | ✅ |
 
 ## Testing
 
