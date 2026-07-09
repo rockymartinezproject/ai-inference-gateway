@@ -1,0 +1,37 @@
+name: Load Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Gateway base URL"
+        required: false
+        default: "http://localhost:8080"
+        type: string
+      vus:
+        description: "Max virtual users"
+        required: false
+        default: "50"
+        type: string
+      duration:
+        description: "Ramp duration in seconds"
+        required: false
+        default: "20"
+        type: string
+
+jobs:
+  load-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start gateway stack
+        run: |
+          docker compose -f deployments/docker/docker-compose.dev.yml up -d --wait
+
+      - name: Run k6 load test
+        uses: grafana/k6-action@v0.3.1
+        with:
+          filename: tests/load/k6_script.js
+        env:
+          BASE_URL: ${{ github.event.inputs.base_url }}
