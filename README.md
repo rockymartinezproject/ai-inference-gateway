@@ -168,6 +168,7 @@ terraform apply
 | 27 | Load testing with k6 | ✅ |
 | 28 | Plugin system for custom middleware | ✅ |
 | 29 | Persistent chat sessions & history | ✅ |
+| 30 | Admin UI dashboard (React/Vite) | ✅ |
 
 ## Testing
 
