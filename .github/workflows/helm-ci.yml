@@ -1,0 +1,29 @@
+name: Helm CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "deployments/helm/**"
+      - ".github/workflows/helm-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "deployments/helm/**"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: "3.14.0"
+
+      - name: Lint chart
+        run: helm lint deployments/helm/ai-inference-gateway
+
+      - name: Template chart
+        run: helm template ai-gateway deployments/helm/ai-inference-gateway
