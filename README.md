@@ -169,6 +169,7 @@ terraform apply
 | 28 | Plugin system for custom middleware | ✅ |
 | 29 | Persistent chat sessions & history | ✅ |
 | 30 | Admin UI dashboard (React/Vite) | ✅ |
+| 31 | Helm chart for Kubernetes | ✅ |
 
 ## Testing
 
