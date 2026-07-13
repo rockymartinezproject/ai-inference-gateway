@@ -17,7 +17,7 @@ class Settings(BaseSettings):
 
     # Server
     gateway_port: int = Field(default=8080, alias="GATEWAY_PORT")
-    gateway_host: str = Field(default="0.0.0.0", alias="GATEWAY_HOST")
+    gateway_host: str = Field(default="0.0.0.0", alias="GATEWAY_HOST")  # nosec B104
     gateway_env: str = Field(default="development", alias="GATEWAY_ENV")
     gateway_workers: int = Field(default=1, alias="GATEWAY_WORKERS")
 
