@@ -170,6 +170,7 @@ terraform apply
 | 29 | Persistent chat sessions & history | ✅ |
 | 30 | Admin UI dashboard (React/Vite) | ✅ |
 | 31 | Helm chart for Kubernetes | ✅ |
+| 32 | Security audit (bandit + pip-audit) | ✅ |
 
 ## Testing
 
