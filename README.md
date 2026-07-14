@@ -171,6 +171,7 @@ terraform apply
 | 30 | Admin UI dashboard (React/Vite) | ✅ |
 | 31 | Helm chart for Kubernetes | ✅ |
 | 32 | Security audit (bandit + pip-audit) | ✅ |
+| 33 | Container image vulnerability scanning (Trivy) | ✅ |
 
 ## Testing
 
