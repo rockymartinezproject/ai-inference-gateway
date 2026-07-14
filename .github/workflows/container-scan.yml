@@ -21,6 +21,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Build Docker image
         uses: docker/build-push-action@v5
         with:
@@ -29,8 +32,6 @@ jobs:
           push: false
           load: true
           tags: ai-inference-gateway:scan
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@v0.36.0
@@ -43,7 +44,7 @@ jobs:
           exit-code: 0
 
       - name: Upload Trivy SARIF results
-        if: always()
-        uses: github/codeql-action/upload-sarif@v3
+        if: hashFiles('trivy-results.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: trivy-results.sarif
