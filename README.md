@@ -172,6 +172,7 @@ terraform apply
 | 31 | Helm chart for Kubernetes | ✅ |
 | 32 | Security audit (bandit + pip-audit) | ✅ |
 | 33 | Container image vulnerability scanning (Trivy) | ✅ |
+| 34 | SBOM generation & signed container provenance | ✅ |
 
 ## Testing
 
