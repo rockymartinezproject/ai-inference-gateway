@@ -16,7 +16,7 @@ asyncpg==0.29.0
 alembic==1.13.2
 
 # Redis
-redis==5.0.6
+redis==8.0.1
 
 # Observability
 prometheus-client==0.20.0
