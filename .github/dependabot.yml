@@ -5,7 +5,8 @@ updates:
     schedule:
       interval: "weekly"
       day: "sunday"
-    open-pull-requests-limit: 10
+    # Security updates only; version bumps are handled manually so CI noise stays low.
+    open-pull-requests-limit: 0
     labels:
       - "dependencies"
       - "python"
@@ -15,7 +16,7 @@ updates:
     schedule:
       interval: "weekly"
       day: "sunday"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 0
     labels:
       - "dependencies"
       - "github-actions"
