@@ -30,7 +30,7 @@ structlog==24.2.0
 
 # Embeddings for semantic cache
 sentence-transformers==5.6.0
-numpy==1.26.4
+numpy==2.4.6
 
 # Circuit Breaker
 pybreaker==1.2.0
