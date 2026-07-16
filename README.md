@@ -173,6 +173,7 @@ terraform apply
 | 32 | Security audit (bandit + pip-audit) | ✅ |
 | 33 | Container image vulnerability scanning (Trivy) | ✅ |
 | 34 | SBOM generation & signed container provenance | ✅ |
+| 35 | Dependabot dependency update automation | ✅ |
 
 ## Testing
 
